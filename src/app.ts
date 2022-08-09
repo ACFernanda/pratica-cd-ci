@@ -5,6 +5,7 @@ const app = express();
 app.use(json());
 
 app.get("/students", async (req: Request, res: Response) => {
+  console.log("nova feature");
   const students = await prisma.student.findMany();
   res.send(students);
 });
@@ -13,7 +14,7 @@ app.post("/students", async (req: Request, res: Response) => {
   const { students } = req.body;
   await prisma.student.createMany({
     data: students,
-    skipDuplicates: true
+    skipDuplicates: true,
   });
 
   res.sendStatus(201); // created
